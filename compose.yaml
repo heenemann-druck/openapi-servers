@@ -1,21 +1,19 @@
+# Standalone-Compose für die OpenAPI-Tool-Server.
+# Ports/Volumes stehen nur in compose.override.yaml (808x), damit beim "extends" aus dem
+# Root keine Listen zusammengeführt werden. Root: docker-compose.yml setzt 908x.
 services:
   filesystem-server:
     build:
       context: ./servers/filesystem
-    ports:
-      - 8081:8000
   memory-server:
     build:
       context: ./servers/memory
-    ports:
-      - 8082:8000
-    volumes:
-      - memory:/app/data:rw
   time-server:
     build:
       context: ./servers/time
-    ports:
-      - 8083:8000
-
-volumes:
-  memory:
+  wikijs-proxy:
+    build:
+      context: ./servers/wikijs-proxy
+    environment:
+      - WIKIJS_URL=${WIKIJS_URL:-http://wikijs:3000}
+      - WIKIJS_API_KEY=${WIKIJS_API_KEY:-}

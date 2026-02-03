@@ -1,0 +1,16 @@
+# Standalone: Ports 808x und Memory-Volume. Wird automatisch mit compose.yaml zusammengeführt.
+services:
+  filesystem-server:
+    ports:
+      - 8081:8000
+  memory-server:
+    ports:
+      - 8082:8000
+    volumes:
+      - memory:/app/data:rw
+  time-server:
+    ports:
+      - 8083:8000
+
+volumes:
+  memory:

@@ -1,0 +1,1 @@
+# Wiki.js OpenAPI Proxy
